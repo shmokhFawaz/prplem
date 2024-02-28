@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Problem Report Form</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script>
+    function generateProblemNumber() {
+      var timestamp = Date.now();
+      var problemNumber = timestamp;
+      document.getElementById("problem_number").innerHTML = 'Problem Number: ' + problemNumber 
+      document.getElementById("problem_number_input").value = problemNumber;
+    }
+
+    function toggleOtherTextbox() {
+      var selectElement = document.getElementById("machine_name");
+      var otherTextbox = document.getElementById("other_machine");
+      var otherLabel = document.getElementById("other_machine_label");
+
+      if (selectElement.value === "other") {
+        otherTextbox.style.display = "block";
+        otherLabel.style.display = "block";
+      } else {
+        otherTextbox.style.display = "none";
+        otherLabel.style.display = "none";
+      }
+    }
+  </script>
+</head>
+<body>
+  <form class="container" method="post" action="/" onsubmit="generateProblemNumber();">
+    <div class="form-group">
+        <h1>Problem Report Form</h1>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="problem_topic">Problem Topic:</label>
+        <input type="text" id="problem_topic" name="problem_topic" required>
+
+        <label for="machine_name">Machine Name:</label>
+        <select id="machine_name" name="machine_name" onchange="toggleOtherTextbox()" required>
+          <option value="mch1">MCH1</option>
+          <option value="mch2">MCH2</option>
+          <option value="mch3">MCH3</option>
+          <option value="other">Other...</option>
+        </select>
+
+        <label for="other_machine" id="other_machine_label" style="display: none;">Other Machine Name:</label>
+        <input type="text" id="other_machine" name="other_machine" style="display: none;">
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <label for="to_department">To Department:</label>
+        <select id="to_department" name="to_department" required>
+          <option value="mechanism">Mechanism</option>
+          <option value="electrical">Electrical</option>
+          <option value="customer-service">Customer Service</option>
+          <option value="operations">Operations</option>
+        </select>
+
+        <label for="from_department">From Department:</label>
+        <select id="from_department" name="from_department" required>
+          <option value="security">Security</option>
+          <option value="technical-marketing">Technical Marketing</option>
+          <option value="finance">Finance</option>
+          <option value="human-resources">Human Resources</option>
+        </select>
+
+        <input type="submit" value="Submit">
+        <input type="hidden" id="problem_number_input" name="problem_number">
+        <label id="problem_number"></label>
+
+    </div>
+  </form>
+
+  <a href="/enquiry.html">Go to Enquiry Page</a>
+</body>
+</html>
+
